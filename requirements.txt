@@ -1,6 +1,6 @@
 streamlit
 ollama
-faiss-cpu
 numpy
-rouge-score
+faiss-cpu
 scikit-learn
+pypdf

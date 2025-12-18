@@ -1,34 +1,31 @@
-from preprocess import load_and_clean_data
-from search import DocumentSearch
-from summarize import summarize_text
-from rouge_score import rouge_scorer
+from document_loader import load_txt
+from chunker import chunk_text
+from embeddings import get_embedding
+from vector_store import VectorStore
+from rag_pipeline import answer_question
+import numpy as np
+import os
 
-documents = load_and_clean_data()
+def evaluate():
+    corpus = ""
+    for file in os.listdir("data"):
+        corpus += load_txt(f"data/{file}")
 
-search_engine = DocumentSearch(documents, alpha=0.5)
+    chunks = chunk_text(corpus)
+    embeddings = [get_embedding(c) for c in chunks]
 
-test_set = {
-    "What is machine learning?": "machine_learning.txt",
-    "Explain reinforcement learning.": "reinforcement_learning.txt",
-    "What is deep learning?": "deep_learning.txt",
-    "What is NLP?": "nlp.txt"
-}
+    store = VectorStore(len(embeddings[0]))
+    store.add(np.array(embeddings), chunks)
 
-correct = 0
-for query, expected_doc in test_set.items():
-    results = search_engine.search(query, top_k=3)
-    top_docs = [doc for doc, _ in results]
-    if expected_doc in top_docs:
-        correct += 1
+    queries = [
+        "What is machine learning?",
+        "Explain NLP",
+        "What is RAG?"
+    ]
 
-accuracy = correct / len(test_set) * 100
-print(f"Search Accuracy: {accuracy:.2f}%")
+    for q in queries:
+        print(f"\nQ: {q}")
+        print("A:", answer_question(q, store))
 
-scorer = rouge_scorer.RougeScorer(['rouge1', 'rougeL'], use_stemmer=True)
-for query, expected_doc in test_set.items():
-    summary = summarize_text(documents[expected_doc], summary_length=3)
-    reference = documents[expected_doc]
-    scores = scorer.score(reference, summary)
-    print(f"\nDocument: {expected_doc}")
-    print(f"ROUGE-1: {scores['rouge1'].fmeasure:.3f}, ROUGE-L: {scores['rougeL'].fmeasure:.3f}")
-    print(f"Summary: {summary}")
+if __name__ == "__main__":
+    evaluate()

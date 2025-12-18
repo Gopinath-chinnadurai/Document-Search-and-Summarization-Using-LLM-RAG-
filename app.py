@@ -1,67 +1,74 @@
 import streamlit as st
-from preprocess import load_and_clean_data
-from search import DocumentSearch
+import os
+import numpy as np
+
+from document_loader import load_txt, load_pdf
+from chunker import chunk_text
+from embeddings import get_embedding
+from vector_store import VectorStore
 from summarize import summarize_text
+from rag_pipeline import answer_question
+from config import TOP_K
 
-st.title("Document Search & Summarization System")
+st.set_page_config(page_title="RAG Document Search & Summarization")
 
-st.caption(
-    "Covers Machine Learning, Deep Learning, NLP, LLMs, RAG, "
-    "Transformers, Reinforcement Learning, Computer Vision, "
-    "Recommendation Systems, and Ethics in AI."
+st.title("RAG Document Search & Summarization")
+
+mode = st.radio(
+    "Choose Mode:",
+    ["Upload & ask from your document","Ask from existing documents"]
 )
 
-documents = load_and_clean_data()
-search_engine = DocumentSearch(documents, alpha=0.5)
+# ---------------- MODE 1 ----------------
+if mode == "Ask from existing documents":
 
-suggested_queries = [
-    "What is machine learning?",
-    "Explain deep learning",
-    "What is NLP?",
-    "What are Large Language Models?",
-    "Explain reinforcement learning",
-    "What is RAG?",
-    "What are transformers?",
-    "Ethics in AI examples"
-]
+    st.subheader(" Ask from existing knowledge base")
+    st.caption(
+        "Topics: Machine Learning, Deep Learning, NLP, LLMs, RAG, Transformers, "
+        "Reinforcement Learning, Computer Vision, Recommendation Systems, Ethics in AI"
+    )
 
-st.subheader("Query Input")
+    query = st.text_input("Type your question:")
 
-custom_query = st.text_input("type your own query:")
+    if query:
+        all_text = ""
+        for file in os.listdir("data"):
+            all_text += load_txt(f"data/{file}")
 
-selected_suggestion = st.selectbox(
-    "Choose a suggested query:",
-    [""] + suggested_queries
-)
+        chunks = chunk_text(all_text)
+        embeddings = [get_embedding(c) for c in chunks]
 
-query = custom_query if custom_query else selected_suggestion
+        store = VectorStore(len(embeddings[0]))
+        store.add(np.array(embeddings).astype("float32"), chunks)
 
-summary_option = st.selectbox(
-    "Summary length:",
-    ["Short", "Medium", "Long"]
-)
+        answer = answer_question(query, store)
 
-summary_length_map = {
-    "Short": 2,
-    "Medium": 4,
-    "Long": 6
-}
-summary_length = summary_length_map[summary_option]
+        st.subheader("Answer")
+        st.write(answer)
 
-if st.button(" Search"):
+# ---------------- MODE 2 ----------------
+if mode == "Upload & ask from your document":
 
-    if not query:
-        st.warning("Please enter or select a query.")
-    else:
-        results = search_engine.search(query, top_k=3)
+    st.subheader(" Upload PDF (Max 200 KB)")
+    pdf = st.file_uploader("Upload your document", type=["pdf"])
 
-        st.subheader("Results")
+    if pdf:
+        text = load_pdf(pdf)
 
-        for doc_name, score in results:
-            st.markdown(f"###  {doc_name}")
-            st.markdown("**Summary:**")
+        chunks = chunk_text(text)
+        embeddings = [get_embedding(c) for c in chunks]
 
-            summary = summarize_text(documents[doc_name], summary_length)
-            st.write(summary)
+        store = VectorStore(len(embeddings[0]))
+        store.add(np.array(embeddings).astype("float32"), chunks)
 
-            st.markdown("---")
+        st.success("Document indexed successfully!")
+
+        st.subheader("Document Summary")
+        st.write(summarize_text(text, 5))
+
+        question = st.text_input("Ask a question from this document:")
+
+        if question:
+            answer = answer_question(question, store)
+            st.subheader("Answer")
+            st.write(answer)

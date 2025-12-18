@@ -1,0 +1,6 @@
+CHUNK_SIZE = 500
+CHUNK_OVERLAP = 100
+TOP_K = 4
+MAX_FILE_SIZE = 200 * 1024  # 200 KB
+EMBED_MODEL = "nomic-embed-text"
+LLM_MODEL = "llama3"
