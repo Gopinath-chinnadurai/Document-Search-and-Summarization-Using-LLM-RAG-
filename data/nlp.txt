@@ -1,0 +1,13 @@
+Natural Language Processing, or NLP, is a field of artificial intelligence that focuses on enabling machines to understand, interpret, and generate human language. NLP combines linguistics, computer science, and machine learning to process textual and spoken data. The ultimate goal of NLP is to allow computers to interact with humans in a natural and meaningful way.
+
+One of the main challenges in NLP is the ambiguity of human language. Words can have multiple meanings depending on context, and sentence structure can vary significantly. NLP systems must handle grammar, syntax, semantics, and context to accurately interpret language. Early NLP systems relied on rule-based approaches, but modern NLP heavily depends on statistical and machine learning techniques.
+
+Text preprocessing is a fundamental step in NLP. Common preprocessing steps include tokenization, lowercasing, stop-word removal, stemming, and lemmatization. Tokenization breaks text into individual words or subwords. Stemming and lemmatization reduce words to their root forms, which helps in reducing vocabulary size and improving model performance.
+
+NLP tasks include text classification, sentiment analysis, named entity recognition, machine translation, question answering, and text summarization. Text classification assigns predefined labels to text, while sentiment analysis determines the emotional tone. Named entity recognition identifies entities such as names, locations, and organizations within text.
+
+Language models play a central role in NLP. Traditional models such as bag-of-words and TF-IDF represent text numerically but do not capture word order or context. Word embeddings such as Word2Vec and GloVe represent words as dense vectors that capture semantic relationships. Contextual embeddings such as BERT and GPT further improve understanding by considering surrounding words.
+
+Evaluation of NLP models uses metrics such as accuracy, precision, recall, BLEU, and ROUGE, depending on the task. NLP systems are widely used in chatbots, search engines, recommendation systems, voice assistants, and document analysis tools.
+
+With the rise of large language models, NLP has achieved significant improvements in language understanding and generation. However, challenges such as bias, hallucination, and computational cost remain important considerations.

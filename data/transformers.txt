@@ -1,0 +1,11 @@
+Transformers are a deep learning architecture introduced to address limitations of recurrent neural networks in handling long-range dependencies. The key innovation of transformers is the self-attention mechanism, which allows the model to focus on different parts of a sequence simultaneously. This enables parallel processing and improves efficiency.
+
+The transformer architecture consists of an encoder and a decoder, each composed of multiple layers. Each layer includes multi-head self-attention and feed-forward neural networks. Self-attention calculates relationships between words in a sentence, allowing the model to understand context more effectively than sequential models.
+
+Transformers revolutionized natural language processing by enabling models like BERT, GPT, T5, and RoBERTa. BERT is an encoder-based model designed for understanding tasks such as classification and question answering. GPT is a decoder-based model optimized for text generation. These models are pre-trained on large datasets and fine-tuned for specific tasks.
+
+Positional encoding is used in transformers to retain information about word order. Since transformers process all tokens simultaneously, positional embeddings help the model understand sequence structure. Multi-head attention allows the model to capture different types of relationships within the text.
+
+Transformers require significant computational resources but scale efficiently with data. They are not limited to NLP and are used in computer vision, speech processing, and reinforcement learning. Vision Transformers apply attention mechanisms to image patches instead of words.
+
+Despite their success, transformers face challenges such as high memory usage and training cost. Researchers are developing optimized variants to improve efficiency. Transformers remain the foundation of modern large language models and are central to many AI systems today.

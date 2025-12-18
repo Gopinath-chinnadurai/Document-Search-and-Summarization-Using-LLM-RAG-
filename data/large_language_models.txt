@@ -1,0 +1,17 @@
+Large Language Models, or LLMs, are advanced AI models designed to understand and generate human-like text. These models are trained on massive text datasets using deep learning techniques, particularly transformer architectures.
+
+LLMs learn statistical patterns in language during pretraining. After pretraining, models can be fine-tuned or prompted to perform specific tasks such as question answering, summarization, and text generation. Examples of LLMs include GPT, BERT, and T5.
+
+Prompting plays a crucial role in controlling LLM behavior. Carefully designed prompts help guide the model to produce accurate and relevant responses. Despite their capabilities, LLMs can produce incorrect or hallucinated information.
+
+LLMs are widely used in chatbots, document analysis, search engines, and code generation tools. However, they require significant computational resources and raise concerns related to bias, misinformation, and energy consumption.
+
+Large Language Models form the backbone of modern AI applications, including Retrieval Augmented Generation systems.Large Language Models rely heavily on pretraining using diverse text sources, which enables them to generalize across many tasks. However, the quality and diversity of training data significantly influence model behavior. Poor-quality data can introduce bias, misinformation, and harmful patterns into the model.
+
+Fine-tuning and instruction tuning are techniques used to adapt LLMs to specific tasks or domains. Fine-tuning adjusts model weights using labeled data, while instruction tuning trains models to follow natural language instructions more effectively.
+
+Another important concept related to LLMs is context length. Context length determines how much text the model can consider at once. Models with larger context windows are better suited for tasks like document summarization and question answering over long texts.
+
+Despite their strengths, LLMs have limitations. They may generate confident but incorrect answers, struggle with complex reasoning, or reflect societal biases present in training data. Techniques such as Retrieval Augmented Generation help mitigate these issues by grounding responses in external knowledge.
+
+As research progresses, LLMs continue to evolve with improvements in efficiency, alignment, and reliability, making them central to the future of AI systems.

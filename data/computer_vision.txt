@@ -1,0 +1,13 @@
+Computer Vision is a field of artificial intelligence that enables machines to interpret and understand visual information from images and videos. The primary goal of computer vision is to replicate the human ability to see and analyze visual data, allowing computers to identify objects, recognize patterns, and make decisions based on visual inputs.
+
+Computer vision systems typically work by processing pixel-level data from images. Early computer vision methods relied on handcrafted features such as edges, corners, and textures. These features were extracted using algorithms like Sobel filters, Canny edge detection, and HOG descriptors. However, these traditional approaches had limitations when dealing with complex or noisy images.
+
+The introduction of deep learning significantly transformed computer vision. Convolutional Neural Networks, or CNNs, became the foundation of modern vision systems. CNNs automatically learn hierarchical features from raw images, starting with simple patterns like edges and gradually learning complex structures such as shapes and objects. This automatic feature extraction greatly improved accuracy and robustness.
+
+Common computer vision tasks include image classification, object detection, image segmentation, and facial recognition. Image classification assigns a single label to an image, such as identifying whether an image contains a cat or a dog. Object detection goes a step further by locating and labeling multiple objects within an image. Image segmentation assigns a label to each pixel, enabling precise object boundaries.
+
+Computer vision has many real-world applications. In healthcare, it is used for medical image analysis such as detecting tumors in X-rays and MRIs. In autonomous vehicles, computer vision enables lane detection, traffic sign recognition, and pedestrian detection. In security systems, facial recognition is used for identity verification and surveillance.
+
+Despite its success, computer vision faces challenges such as variations in lighting, occlusion, and viewpoint changes. Models also require large labeled datasets and high computational power for training. Ongoing research focuses on improving model efficiency, generalization, and fairness.
+
+Overall, computer vision plays a critical role in modern AI systems and continues to expand into new industries and applications.
