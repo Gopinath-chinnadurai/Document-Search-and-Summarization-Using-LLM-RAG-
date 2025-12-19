@@ -5,6 +5,9 @@
 This project implements a Document Search and Summarization System using a Retrieval-Augmented Generation (RAG) approach.
 It allows users to uploads the document(200KB) and search across a corpus of AI-related documents and generate concise summaries using a Large Language Model (LLaMA 3 via Ollama).
 
+<img width="990" height="569" alt="RAG_Doc_Summarize_UI" src="https://github.com/user-attachments/assets/d50be2bb-449e-4117-9d84-84bc0a07a862" />
+
+
 The system combines:
 
 - Traditional Information Retrieval (TF-IDF)
@@ -83,16 +86,12 @@ https://ollama.com
 
 - streamlit run app.py
 
-- Actual UI <img width="990" height="569" alt="RAG_Doc_Summarize_UI" src="https://github.com/user-attachments/assets/2bc41a61-45f7-434b-a912-984e159f87e7" />
+**The app will open automatically in your browser:**
 
-
-*The app will open automatically in your browser:*
-
-- http://localhost:8501
 
 ## Application Features
 
-*Query Input*
+**Query Input**
 
 - Type your own query OR
 
