@@ -83,6 +83,9 @@ https://ollama.com
 
 - streamlit run app.py
 
+- Actual UI <img width="990" height="569" alt="RAG_Doc_Summarize_UI" src="https://github.com/user-attachments/assets/2bc41a61-45f7-434b-a912-984e159f87e7" />
+
+
 *The app will open automatically in your browser:*
 
 - http://localhost:8501
