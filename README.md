@@ -7,16 +7,9 @@ It allows users to uploads the document(200KB) and search across a corpus of AI-
 
 <img width="990" height="569" alt="RAG_Doc_Summarize_UI" src="https://github.com/user-attachments/assets/d50be2bb-449e-4117-9d84-84bc0a07a862" />
 
+## Workflow
 
-The system combines:
-
-- Traditional Information Retrieval (TF-IDF)
-
-- Vector-based semantic search (LLM embeddings)
-
-- LLM-powered summarization
-
-- Interactive Streamlit UI
+**Documents (txt / pdf) -> Chunking -> Embeddings -> FAISS Vector Store -> Similarity Search (Top-K) -> LLM Prompt with ONLY retrieved context  ->  Answer**
 
 ## Objectives
 
@@ -26,11 +19,13 @@ The system combines:
 
 - Generate coherent summaries of retrieved documents
 
--  Allow users to control summary length
-
 - Provide a clean and user-friendly interface
 
-## Supported Topics
+## Document supports
+
+- User can upload Pdf/txt within 200KB
+
+## Existing Supported Topics
 
 The corpus contains documents related to:
 
@@ -65,6 +60,8 @@ https://ollama.com
 
 - ollama pull llama3
 
+- ollama pull nomic-embed-text 
+
 *2. Clone the Repository*
 
 - git clone https://github.com/Gopinath-chinnadurai/Document-Search-and-Summarization-Using-LLM-RAG-.git
@@ -75,14 +72,7 @@ https://ollama.com
 
 - pip install -r requirements.txt
 
-*4. requirements.txt*
-
-- streamlit
-- ollama
-- numpy
-- scikit-learn
-
-*5. Running the Application*
+*4. Running the Application*
 
 - streamlit run app.py
 
@@ -93,9 +83,9 @@ https://ollama.com
 
 **Query Input**
 
-- Type your own query OR
+- Upload the documents OR
 
-- Select from suggested queries (auto-suggestions)
+- Ask question (within topics)
 
 *Search*
 
