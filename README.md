@@ -193,8 +193,6 @@ This project must be run locally or on a VM/server with Ollama installed.
 
 - Interactive and intuitive UI
 
-**Fully satisfies the interview assignment requirements**
-
 ## Author
 
 **Gopinath Chinnadurai**
