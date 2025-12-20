@@ -2,177 +2,203 @@
 
 ### Project Overview
 
-This project implements a Document Search and Summarization System using a Retrieval-Augmented Generation (RAG) approach.
-It allows users to uploads the document(200KB) and search across a corpus of AI-related documents and generate concise summaries using a Large Language Model (LLaMA 3 via Ollama).
+This project implements a **Document Search and Summarization System** using a **Retrieval-Augmented Generation (RAG)** approach.
+Generate concise summaries using a **Large Language Model (LLaMA 3 via Ollama)**.
 
 <img width="990" height="569" alt="RAG_Doc_Summarize_UI" src="https://github.com/user-attachments/assets/d50be2bb-449e-4117-9d84-84bc0a07a862" />
 
-## Workflow
+**The system allows users to:**
 
-**Documents (txt / pdf) -> Chunking -> Embeddings -> FAISS Vector Store -> Similarity Search (Top-K) -> LLM Prompt with ONLY retrieved context  ->  Answer**
+- Upload their own document (PDF ≤ 200 KB) and:
+
+      Get an automatic summary
+
+      Ask context-aware questions from the uploaded document
+
+- Ask questions from a preloaded knowledge base (AI-related documents)
+
+    Supported topics are Machine Learning, Deep Learning, Natural Language Processing (NLP), Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), Transformers, Reinforcement Learning, Computer Vision, Recommendation Systems, Ethics in AI
+
+## The project uses:
+
+- Vector embeddings
+
+- FAISS vector database
+
+- Large Language Model (LLaMA 3 via Ollama)
+
+- Streamlit for UI
+
+**This design ensures grounded answers, reduced hallucinations, and scalable retrieval.**
+
+## End-to-End Workflow
+
+    Documents (TXT / PDF)
+        ↓
+    Text Chunking
+        ↓
+    Embedding Generation
+        ↓
+    FAISS Vector Store
+        ↓
+    Similarity Search (Top-K)
+        ↓
+    LLM Prompt with ONLY Retrieved Context
+        ↓
+    Final Answer / Summary
 
 ## Objectives
 
-- Efficiently search a large text corpus
+- Efficiently search across a document corpus
 
-- Retrieve the most relevant documents for a user query
+- Retrieve the most relevant text using semantic similarity
 
-- Generate coherent summaries of retrieved documents
+- Generate accurate summaries using an LLM
 
-- Provide a clean and user-friendly interface
+- Support document upload + question answering
 
-## Document supports
+- Provide a simple, interactive UI
 
-- User can upload Pdf/txt within 200KB
-
-## Existing Supported Topics
-
-The corpus contains documents related to:
-
-1.  Machine Learning
-
-2. Deep Learning
-
-3. Natural Language Processing (NLP)
-
-4. Large Language Models (LLMs)
-
-5. Retrieval-Augmented Generation (RAG)
-
-6. Transformers
-
-7. Reinforcement Learning
-
-8. Computer Vision
-
-9. Recommendation Systems
-
-10. Ethics in AI
+- Demonstrate a real-world RAG pipeline
 
 ## Installation & Setup
 
-*1. Prerequisites*
+**1. Prerequisites**
 
 - Python 3.10+
-
+   
 - Ollama installed
-https://ollama.com
+    https://ollama.com
 
-- ollama pull llama3
+ **Pull required models:**
+    
+     ollama pull llama3
+    
+     ollama pull nomic-embed-text 
 
-- ollama pull nomic-embed-text 
+**2. Clone the Repository**
 
-*2. Clone the Repository*
+     git clone https://github.com/Gopinath-chinnadurai/Document-Search-and-Summarization-Using-LLM-RAG-.git
 
-- git clone https://github.com/Gopinath-chinnadurai/Document-Search-and-Summarization-Using-LLM-RAG-.git
+     cd Document-Search-and-Summarization-Using-LLM-RAG-
 
-- cd Document-Search-and-Summarization-Using-LLM-RAG-
+**3. Install Dependencies**
 
-*3. Install Dependencies*
+     pip install -r requirements.txt
 
-- pip install -r requirements.txt
+**4. Running the Application**
 
-*4. Running the Application*
-
-- streamlit run app.py
+     streamlit run app.py
 
 **The app will open automatically in your browser:**
 
-
 ## Application Features
 
-**Query Input**
+**Mode 1: Upload & Ask from Your Document**
 
-- Upload the documents OR
+- Upload PDF (≤ 200 KB)
 
-- Ask question (within topics)
+- Automatic document summarization
 
-*Search*
+- Ask follow-up questions based on uploaded content
 
-Hybrid document search using:
+- Conversational and context-aware
 
-- TF-IDF (keyword relevance)
+**Example:**
 
-- LLM embeddings (semantic similarity)
+     Upload: Resume.pdf
+     Summary shown
+     Question: What is the education background?
+     Answer: Bachelor of Science in Computer Science...
 
-*Summarization*
+**Mode 2: Ask from Existing Knowledge Base**
 
-- Summaries generated using LLaMA 3
+- Ask questions related to the 10 AI topics
 
-- Adjustable summary length[Short, Medium, Long]
+**Uses:**
 
-*Results Display*
+    Chunking
 
-- Top-N relevant documents
+    Vector embeddings
 
-- Similarity score displayed
+    FAISS similarity search
 
-- Expandable summaries
+    LLM answer generation
 
-- Pagination support
+*Answers are grounded in the stored documents*
 
-## Evaluation
+**Example:**
 
-Run Evaluation Script
+    Question: What is NLP?
+    Answer: Natural Language Processing (NLP) is a field of AI that enables machines to understand and generate human language...  
 
-- python evaluation.py
+## Why This Is a RAG System?
 
-## Evaluation Includes:
+**This project strictly follows the RAG pipeline:**
 
-- Search accuracy (document relevance)
+**1. Retrieve**
 
-- Summary quality
+- Documents are chunked and stored as vectors in FAISS
 
-- Manual + automated analysis readiness (ROUGE-compatible)
+- Relevant chunks are retrieved using semantic similarity
 
-## Why This Is RAG?
+**2. Augment**
 
-This project strictly follows the RAG pipeline:
+- Retrieved text is injected into the LLM prompt as context
 
-*1. Retrieve*
+**3. Generate**
 
-- Relevant documents are retrieved from an external corpus using TF-IDF + embeddings
+- LLM generates answers only from retrieved context
 
-*2. Augment*
+- If information is missing, it responds:
 
-- Retrieved documents are passed as context to the LLM
+         Not found in the document
 
-*3. Generate*
+**This approach:**
 
-- The LLM generates grounded summaries based on retrieved content
+- Reduces hallucinations
 
-*This reduces hallucinations and improves factual accuracy.*
+- Improves factual accuracy
 
+- Works with private documents
+    
 ## Scalability & Efficiency
+
+- FAISS enables fast similarity search
 
 - Easily extendable to thousands of documents
 
-- Embeddings can be stored in FAISS / Vector Databases
+- Chunk-based indexing
 
-- Modular design for future enhancements
+- Local LLM inference via Ollama (no API cost)
 
-- Local LLM inference using Ollama for efficiency
+- Modular and production-friendly code
+
+## Deployment Note
+
+Streamlit Cloud does not support Ollama
+This project must be run locally or on a VM/server with Ollama installed.
 
 ## Conclusion
 
-*This project demonstrates:*
+**This project demonstrates:**
 
-- Practical use of Large Language Models
+- Practical use of LLMs
 
 - Strong Information Retrieval fundamentals
 
-- Real-world RAG system design
+- Real-world RAG architecture
 
-- Clean, modular codebase
+- Clean, modular Python code
 
-Interactive and user-friendly UI
+- Interactive and intuitive UI
 
-*Fully satisfies the Interview Assignment requirements*
+**Fully satisfies the interview assignment requirements**
 
 ## Author
 
-*Gopinath Chinnadurai*
+**Gopinath Chinnadurai**
 
-*GitHub:*
-
-https://github.com/Gopinath-chinnadurai
+**GitHub:**
+     
+     https://github.com/Gopinath-chinnadurai
